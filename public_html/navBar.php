@@ -1,3 +1,11 @@
+<?php 
+
+    $conexion; include_once("conexionSql.php");
+    $consultaTipo = $conexion->query("SELECT * FROM catedratico WHERE idPersona=".$_SESSION['id'].";");
+    $tipos = $consultaTipo->num_rows;
+
+?>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -9,7 +17,9 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#" name="salir">Cursos Disponibles</a>
             <a class="dropdown-item" href="#" method="get">Cursos Asignados</a>
-            <a class="dropdown-item" href="#" name="salir">Cursos Impartidos (mostrar solo si es docente) </a>
+            <?php if($tipos > 0 ){ ?>
+                <a class="dropdown-item" href="#" name="salir">Cursos Impartidos</a>
+            <?php } ?>
             </div>
         </li>
 
@@ -18,7 +28,7 @@
             Sesion
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#" name="salir">Cerrar Sesion</a>
+            <a class="dropdown-item" href="index.php?accion=cerrarSesion" name="salir">Cerrar Sesion</a>
             <a class="dropdown-item" href="perfil.php?correo=<?php echo $_SESSION['correo'] ?>" >Ver Perfil</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="">Sesion Activa: <?php echo $_SESSION['nombre'] ?></a>

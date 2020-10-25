@@ -6,9 +6,16 @@
     $resultado = $conexion->query($sql);
     $usuario;
     foreach($resultado as $fila) $usuario=$fila;
-    
+    $consultaTipo = $conexion->query("SELECT * FROM catedratico WHERE idPersona=".$usuario['id_persona'].";");
+    $tipo;
+    if(($consultaTipo->num_rows) > 0){
+      $tipo = "Catedratico";
+    }else{
+      $tipo = "Estudiante";
+    }
 ?>
 
+<!DOCTYPE html>
 <html lang="es" dir="ltr">
   <head>
     <title>Perfil</title>
@@ -21,17 +28,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </head>
   <body>
-  <div>
         <?php include("navBar.php"); ?>
                       
         <br><br>
         <div class="container card">
-            <form method="post">
                 <div class="row">
                     <div class="col-md-6">
                         <br>
                         <h3>Nombre:  <?php echo $usuario['nombre']." ".$usuario['apellido']?></h3>
-                        <h4>Tipo:  si es docente o si es estudiante </h4>
+                        <h4>Tipo:  <?php echo $tipo ?> </h4>
                     </div>
                 </div>
                 <br><br>
@@ -94,21 +99,21 @@
                                   </div>
                                 </div>
                                 <?php if($usuario['correo_electronico']===$_SESSION['correo']){ ?>
-                                  <div class="card col-md-4">
+                                  <div class="col-md-4">
                                     <br>
-                                    <h6>Opciones:</h6><br>
+                                    <h6>Opciones:</h6>
                                     <ul>
+                                      <form action="registroUsuario.php" method="post">
+                                          <input type="email" name="correo" value="<?php echo $usuario['correo_electronico'] ?>" hidden>
+                                        <li>
+                                            <button class="btn btn-link" type="submit" name="accion" value="editar">Editar Informacion</button>
+                                        </li>
+                                      </form>
                                       <li>
-                                        <form action="CRUD Usuario/registroUsuario.php" method="post">
-                                          <input type="text" name="correo" value="<?php echo $usuario['correo_electronico'] ?> " hidden></input>
-                                          <button class="btn btn-link" type="submit" name="accion" value="editar">Editar Informacion</button>
-                                        </form>
+                                        <button class="btn btn-link" data-toggle="modal" data-target="#EliminarCuenta">Eliminar Perfil</button>
                                       </li>
                                       <li>
-                                        <form action="CRUD Usuario/registroUsuario.php" method="post">
-                                          <input type="text" name="correo" value="<?php echo $usuario['correo_electronico'] ?> " hidden></input>
-                                          <button class="btn btn-link" type="submit" name="accion" value="eliminar">Eliminar Perfil</button>
-                                        </form>
+                                        <button class="btn btn-link" data-toggle="modal" data-target="#DarCurso">Dar curso</button>
                                       </li>
                                     </ul>
                                   </div>
@@ -117,8 +122,70 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>           
+                </div>      
         </div>
+
+
+        <div class="modal fade" id="EliminarCuenta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  ¿Esta seguro que desea eliminar su cuenta?
+              </div>
+              <div class="modal-footer">
+                  <form action="accionUsuario.php" method="post">  
+                    <div class="row justify-content-center">
+                      <button name="accion" value="eliminar" class="btn btn-danger " type="submit">Eliminar</button>
+                      <div class="col-sm-1"></div>
+                      <button type="button" class=" btn btn-secondary" data-dismiss="modal">Cerrar</button>     
+                      <div class="col-sm-1"></div>
+                  </div>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="DarCurso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="accionUsuario.php" method="post">  
+                <div class="modal-body">
+                <select name="idCurso" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                  <option selected value="-1">Elegir curso...</option>
+                  <?php 
+                    $resultado = $conexion->query("SELECT * FROM curso;");
+                    foreach($resultado as $curso){
+                  ?>
+                    <option value="<?php echo $curso['id_curso'] ?>"><?php echo $curso['nombre'] ?></option>
+                  <?php } ?>
+                </select>
+                </div>
+                <div class="modal-footer">
+                  <div class="row justify-content-center">
+                      <button name="accion" value="docente" class="btn btn-dark " type="submit">Dar curso</button>
+                      <div class="col-sm-1"></div>
+                      <button type="button" class=" btn btn-secondary" data-dismiss="modal">Cerrar</button>     
+                      <div class="col-sm-1"></div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+
   </body>
 </html>

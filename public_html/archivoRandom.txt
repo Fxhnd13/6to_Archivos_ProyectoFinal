@@ -1,0 +1,21 @@
+<div class="row">
+      <div class="col-lg-5">
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object dp img-circle" src="user.png" style="width: 100px;height:100px;">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading"><?php echo $nombre; ?><small>  Guatemala</small></h4>
+                <h5>Software Developer at <a href=""><?php echo $correo; ?></a></h5>
+                <hr style="margin:8px auto">
+
+                <span class="label label-default">HTML5/CSS3</span>
+                <span class="label label-default">jQuery</span>
+                <span class="label label-info">CakePHP</span>
+                <span class="label label-default">Android</span>
+            </div>
+        </div>
+      </div>
+    </div>
+
+CREATE TRIGGER area_insert BEFORE INSERT ON area FOR EACH ROW BEGIN SET @cantidad = (SELECT COUNT(*) FROM Area WHERE nombre = NEW.nombre); IF cantidad <> 0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'An error occurred'; END IF; END

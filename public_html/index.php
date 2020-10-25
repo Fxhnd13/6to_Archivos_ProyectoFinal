@@ -1,3 +1,9 @@
+<?php 
+   if(isset($_GET['accion'])){
+      session_abort();
+   }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +38,7 @@
                      <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
                   </div>
                   <button type="submit" class="btn btn-black">Ingresar</button>
-                  <button class="btn btn-secondary" onclick="location.href='CRUD Usuario/registroUsuario.php'">Registrarse</button>
+                  <button class="btn btn-secondary" onclick="location.href='registroUsuario.php'">Registrarse</button>
                </form>
             </div>
          </div>

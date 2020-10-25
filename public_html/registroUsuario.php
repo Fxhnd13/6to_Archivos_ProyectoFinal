@@ -3,7 +3,7 @@
   if(isset($_POST['correo']))
   {
     $conexion; include_once('conexionSql.php');
-    $sql = "SELECT * FROM USER WHERE email = '".$_POST['correo']."' LIMIT 1";
+    $sql = "SELECT * FROM persona WHERE correo_electronico = '".$_POST['correo']."' LIMIT 1";
     $resultado = $conexion->query($sql);
     foreach($resultado as $fila) $usuario=$fila;
   }
@@ -28,17 +28,18 @@
         <div class="col-md-4">
         <h1 class="text-center"><?php echo ((isset($usuario))? "Editar Usuario" : "Crear Usuario") ?></h1>
         <form action="accionUsuario.php" method="post">
-            <input hidden type="email" name="correoViejo" value="<?php echo ((isset($usuario))? $usuario['correo'] : "") ?>">
+            <input type="email" name="correoViejo" value="<?php echo ((isset($usuario))? $usuario['correo_electronico'] : "") ?>">
+            <input type="text" name="accion" value="<?php echo ((isset($usuario))? "editar" : "crear") ?>">
             <?php if(!isset($usuario)){ ?>
                 <label for="cui">Cui: </label>
-                <input class="form-control" type="password" name="cui" value="" required>
+                <input class="form-control" type="text" name="cui" value="" required>
             <?php } ?>
             <label for="nombre">Nombre: </label>
             <input class="form-control" type="text" name="nombre" value="<?php echo ((isset($usuario))? $usuario['nombre'] : "") ?>" required>
             <label for="apellido">Apellido: </label>
             <input class="form-control" type="text" name="apellido" value="<?php echo ((isset($usuario))? $usuario['apellido'] : "") ?>" required>
             <label for="correo">E-mail: </label>
-            <input class="form-control" type="email" name="correo" value="<?php echo ((isset($usuario))? $usuario['correo'] : "") ?>" required>
+            <input class="form-control" type="email" name="correo" value="<?php echo ((isset($usuario))? $usuario['correo_electronico'] : "") ?>" required>
             <label for="password1">Contraseña: </label>
             <input class="form-control" type="password" name="password1" value="<?php echo ((isset($usuario))? $usuario['password'] : "") ?>" required>
             <label for="password2">Confirmar contraseña: </label>
@@ -47,7 +48,7 @@
             <input class="form-control" type="number" name="telefono" value="<?php echo ((isset($usuario))? $usuario['telefono'] : "") ?>" required>
             <br>
             <div class="text-center">
-                <input class="btn btn-primary" name="accion" type="submit" value="<?php echo ((isset($usuario))? "editar" : "crear") ?>">
+                <button class="btn btn-primary" type="submit"><?php echo ((isset($usuario))? "Editar" : "Crear") ?></button>
             </div>
         </form>
         </div>
