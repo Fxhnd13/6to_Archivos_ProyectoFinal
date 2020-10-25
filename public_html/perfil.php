@@ -125,7 +125,7 @@
                 </div>      
         </div>
 
-
+        <!--MODAL PARA ELIMINAR CUENTA, PERO NO SE SI ES VIABLE, DEMASIADOS REGISTROS QUE ELIMINAR, NO FUNCIONAL-->
         <div class="modal fade" id="EliminarCuenta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -152,6 +152,7 @@
           </div>
         </div>
 
+        <!--MODAL PARA QUE UN USUARIO DECIDA DAR UN CURSO-->
         <div class="modal fade" id="DarCurso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">

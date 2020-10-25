@@ -3,6 +3,7 @@
 session_start();
 $conexion; include_once("conexionSql.php");
 
+//si la accion es que el usuario dará un curso
 if($_POST['accion'] === "docente"){
 
     $correo = $_SESSION['correo'];
@@ -25,7 +26,7 @@ if($_POST['accion'] === "docente"){
         }
     }
 
-}else if($_POST['accion'] === "crear"){
+}else if($_POST['accion'] === "crear"){ //si se va a crear un usuario
     //aquí creamos un nuevo usuario Finalizado
     $consultaIdNuevo = "SELECT (MAX(id_persona)+1) as id_persona FROM persona";
     $resultado = $conexion->query($consultaIdNuevo);
@@ -46,7 +47,7 @@ if($_POST['accion'] === "docente"){
         $_SESSION['mensajeError'] = "Las contraseñas ingresadas no coinciden, inténtelo de nuevo";
         header("location: error.php");
     }
-}else if($_POST['accion'] === "editar"){
+}else if($_POST['accion'] === "editar"){ //si se va a editar un usuario
     //editamos los datos de un usuario finalizado
     $sql = "UPDATE persona set nombre='".$_POST['nombre']."', apellido='".$_POST['apellido']."', correo_electronico='"
     .$_POST['correo']."', password='".$_POST['password1']."', telefono=".$_POST['telefono']." WHERE correo_electronico='"

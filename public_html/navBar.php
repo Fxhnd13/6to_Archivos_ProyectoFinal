@@ -15,10 +15,12 @@
             Cursos
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#" name="salir">Cursos Disponibles</a>
-            <a class="dropdown-item" href="#" method="get">Cursos Asignados</a>
+            <!-- tecnicamente estos tres enlaces dirigen a la misma página pero hay que hacer 
+            que reciban un parametro get, tal que podamos determinar que consulta realizar -->
+            <a class="dropdown-item" href="principalCursos.php?consulta=todosLosCursos">Cursos Disponibles</a> <!-- aqui enlace a la pagina principal-->
+            <a class="dropdown-item" href="principalCursos.php?consulta=cursosAsignados">Cursos Asignados</a> <!-- aquí enlace a la pagina de cursos que el usuario tiene asignados-->
             <?php if($tipos > 0 ){ ?>
-                <a class="dropdown-item" href="#" name="salir">Cursos Impartidos</a>
+                <a class="dropdown-item" href="principalCursos.php?consulta=cursosImpartidos">Cursos Impartidos</a> <!-- aquí enlace a la pagina de cursos que el usuario imparte -->
             <?php } ?>
             </div>
         </li>
@@ -40,9 +42,9 @@
         </li>
 
         </ul>
-        <form class="form-inline my-2 my-lg-0" action="" >
-        <input name="nombreRevista" id="nombreRevista" class="form-control mr-sm-2" type="search" placeholder="Nombre de curso" aria-label="Search" >
-        <button name="buscarNombre" id="buscarNombre"  value="si" class="btn btn-outline-success my-2 my-sm-0" type="submit" >Buscar</button>
+        <form class="form-inline my-2 my-lg-0" action="principalCursos.php" > <!-- igual que las consultas anteriores, con la diferencia que se busca por nombre-->
+            <input name="nombreCurso" class="form-control mr-sm-2" type="search" placeholder="Nombre de curso" aria-label="Search" >
+            <button name="consulta" value="cursoEspecifico" class="btn btn-outline-success my-2 my-sm-0" type="submit" >Buscar</button>
         </form>
     </div>
 </nav>
