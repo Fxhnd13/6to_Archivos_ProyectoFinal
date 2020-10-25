@@ -8,7 +8,7 @@ Proyecto de Manejo de archivos, página web de administración de cursos denomin
 * archivoRandom.txt -> partes de codigo creí servirían pero no, y el gatillo que creó marito para agregarlo después a la base de datos final
 * conexionSql.php -> archivo que carga la conexion con las credenciales especificadas.
 * database.php -> irrelevante, no sirve de nada, era un modelo.
-* error.php -> pagina de error que acepta un mensaje, debe enviarse como $_SESSION['mensajeError']=<mensaje>
+* error.php -> pagina de error que acepta un mensaje, debe enviarse como $_SESSION['mensajeError']=mensaje
 * index.php -> login basicamente
 * navBar.php -> archivo que contiene la navBar, aquí se agregan las opciones que pueda tener el usuario básicamente
 * perfil.php -> pagina del perfil del usuario, también para visualizar la información de otros usuarios cuando se pueda acceder a esta.
@@ -24,4 +24,4 @@ Proyecto de Manejo de archivos, página web de administración de cursos denomin
 * Traté de documentar cosas pero tampoco es que haya hecho mucho xd pero como me despierto a las 2 de la tarde ahí está xddd
 * Dios los bendiga, si creen en él, éxitos
 
-#No lo pidas, consíguelo por tu cuenta y tendrás éxito - eureka seven (un buen mensaje por parte de nuestro Dios moi)
+#No lo pidas, consíguelo por tu cuenta y tendrás éxito - eureka seven (un buen mensaje por parte de nuestro Dios moi) xddddd
