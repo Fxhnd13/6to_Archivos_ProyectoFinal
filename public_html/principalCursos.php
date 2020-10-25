@@ -34,7 +34,7 @@
 <body>
     <?php include("navBar.php"); ?>
     <h1 class="container h-100">Lista de Cursos</h1>
-    <?php include("CRUDInscripcion/lista-cursos.php"); ?>
+    <?php include("lista-cursos.php"); ?>
     
 </body>
 </html>

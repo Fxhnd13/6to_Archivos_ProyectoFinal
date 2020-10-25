@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $conexion; include_once('../conexionSql.php');
+    $conexion; include_once('conexionSql.php');
     //if($_SESSION['id']!=null && isset($_SESSION['id'])){
         $sql1 = "SELECT curso.nombre nombre_curso , curso.fecha_creacion, curso.fecha_finalizacion, curso.costo_minimo, curso.id_curso, curso.id_area,
         COUNT(registro.id_curso) inscritos,persona.* FROM curso left join registro  ON (registro.id_curso=".
@@ -28,7 +28,7 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!------ Include the above in your HEAD tag ---------->
-    <link rel=StyleSheet HREF="../Css/perfilCurso.css" TYPE="text/css" MEDIA=screen>
+    <link rel=StyleSheet HREF="Css/perfilCurso.css" TYPE="text/css" MEDIA=screen>
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
     <title>Curso</title>
 </head>
@@ -68,7 +68,7 @@
                     ?>
                     <?php if ($rows > 0){ ?>
                         <div class="col-xs-12 col-sm-4 emphasis">
-                            <form action="../CRUDInscripcion/lista-cursos.php" method="post">
+                            <form action="lista-cursos.php" method="post">
                             </br>
                                 <span class="fa fa-user"></span>
                                 <input type="hidden" name="id_curso" value="<?php echo $fila['id_curso'] ?>">
@@ -77,7 +77,7 @@
                         </div>
                     <?php }else{ ?>  
                         <div class="col-xs-12 col-sm-4 emphasis">
-                            <form action="../CRUDInscripcion/inscribir.php" method="post">
+                            <form action="inscribir.php" method="post">
                                 </br>
                                 <span class="fa fa-user"></span>
                                 <input type="hidden" name="id_curso" value="<?php echo $fila['id_curso'] ?>">

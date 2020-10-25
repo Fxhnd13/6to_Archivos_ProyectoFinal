@@ -52,7 +52,7 @@
                 <td><?php echo $fila['fecha_finalizacion'] ?></td>
                 <td>Q <?php echo $fila['costo_minimo'] ?></td>
                 <td>
-                    <form action="CRUDInscripcion/perfil-curso.php" method="post">
+                    <form action="perfil-curso.php" method="post">
                         <input type="hidden" name="id_curso" value="<?php echo $fila['id_curso'] ?>">
                         <input type="submit" value="  Ver " class="btn btn-sm btn-warning">
                     </form>

@@ -7,9 +7,9 @@
         $sql1 = "INSERT INTO registro (id_persona, id_curso, finalizado) VALUES (".$nombre_persona.",".$_POST['id_curso'].",0);";
         $rows;
         if($conexion->query($sql1) === TRUE){
-            header("location: ../CRUDInscripcion/lista-cursos.php");
+            header("location: lista-cursos.php");
         }else{
-            header("location: ../index.php");
+            header("location: index.php");
         }
         //$cont = 0;
     /*}else{
