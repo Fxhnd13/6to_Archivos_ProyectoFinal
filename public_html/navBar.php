@@ -1,7 +1,7 @@
 <?php 
 
     $conexion; include_once("conexionSql.php");
-    $consultaTipo = $conexion->query("SELECT * FROM catedratico WHERE idPersona=".$_SESSION['id'].";");
+    $consultaTipo = $conexion->query("SELECT * FROM catedratico WHERE id_persona=".$_SESSION['id'].";");
     $tipos = $consultaTipo->num_rows;
 
 ?>
@@ -42,8 +42,9 @@
         </li>
 
         </ul>
-        <form class="form-inline my-2 my-lg-0" action="principalCursos.php" > <!-- igual que las consultas anteriores, con la diferencia que se busca por nombre-->
+        <form class="form-inline my-2 my-lg-0" action="principalCursos.php" method="get"> <!-- igual que las consultas anteriores, con la diferencia que se busca por nombre-->
             <input name="nombreCurso" class="form-control mr-sm-2" type="search" placeholder="Nombre de curso" aria-label="Search" >
+            <input type="hidden" name="busqueda" value="1">
             <button name="consulta" value="cursoEspecifico" class="btn btn-outline-success my-2 my-sm-0" type="submit" >Buscar</button>
         </form>
     </div>
