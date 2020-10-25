@@ -11,7 +11,10 @@
     $_SESSION['nombre'] = $usuario['nombre'];
     $_SESSION['correo'] = $usuario['correo_electronico'];
     $_SESSION['apellido'] = $usuario['apellido'];
-    header("location: perfil.php");
+    $_SESSION['cui'] = $usuario['cui'];
+    $_SESSION['id'] = $usuario['id_persona'];
+    $_SESSION['telefono'] = $usuario['telefono'];
+    header("location: principalCursos.php");
   }else{
     $_SESSION['mensajeError'] = "No se pudo iniciar sesion, credenciales incorrectas";
     header("location: error.php");

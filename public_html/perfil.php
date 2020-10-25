@@ -1,8 +1,14 @@
-<?php
-session_start();
-$correo =  $_SESSION['correo'];
-$nombre = $_SESSION['nombre']." ".$_SESSION['apellido'];
+<?php 
+    session_start();
+    $conexion; include_once('conexionSql.php');
+    $sql = "SELECT * FROM persona WHERE correo_electronico='".$_GET['correo']."' LIMIT 1;";
+  
+    $resultado = $conexion->query($sql);
+    $usuario;
+    foreach($resultado as $fila) $usuario=$fila;
+    
 ?>
+
 <html lang="es" dir="ltr">
   <head>
     <title>Perfil</title>
@@ -15,24 +21,104 @@ $nombre = $_SESSION['nombre']." ".$_SESSION['apellido'];
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <div class="row">
-      <div class="col-lg-5">
-        <div class="media">
-            <a class="pull-left" href="#">
-                <img class="media-object dp img-circle" src="user.png" style="width: 100px;height:100px;">
-            </a>
-            <div class="media-body">
-                <h4 class="media-heading"><?php echo $nombre; ?><small>  Guatemala</small></h4>
-                <h5>Software Developer at <a href=""><?php echo $correo; ?></a></h5>
-                <hr style="margin:8px auto">
-
-                <span class="label label-default">HTML5/CSS3</span>
-                <span class="label label-default">jQuery</span>
-                <span class="label label-info">CakePHP</span>
-                <span class="label label-default">Android</span>
-            </div>
+  <div>
+        <?php include("navBar.php"); ?>
+                      
+        <br><br>
+        <div class="container card">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <br>
+                        <h3>Nombre:  <?php echo $usuario['nombre']." ".$usuario['apellido']?></h3>
+                        <h4>Tipo:  si es docente o si es estudiante </h4>
+                    </div>
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-md-8">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Acerca de...</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                              <br>
+                              <div class="row">
+                                <div class="col-md-7">
+                                  <div class="row">
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-4">
+                                          <label>Id: </label>
+                                      </div>
+                                      <div class="col-md-7">
+                                      <p><?php echo $usuario['id_persona'] ?></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-4">
+                                          <label>Nombre(s): </label>
+                                      </div>
+                                      <div class="col-md-7">
+                                          <p><?php echo $usuario['nombre'] ?></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-4">
+                                          <label>Apellido(s): </label>
+                                      </div>
+                                      <div class="col-md-7">
+                                      <p><?php echo $usuario['apellido'] ?></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-4">
+                                          <label>Correo: </label>
+                                      </div>
+                                      <div class="col-md-7">
+                                      <p><?php echo $usuario['correo_electronico'] ?></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-4">
+                                          <label>Telefono: </label>
+                                      </div>
+                                      <div class="col-md-7">
+                                      <p><?php echo $usuario['telefono'] ?></p>
+                                      </div>
+                                  </div>
+                                </div>
+                                <?php if($usuario['correo_electronico']===$_SESSION['correo']){ ?>
+                                  <div class="card col-md-4">
+                                    <br>
+                                    <h6>Opciones:</h6><br>
+                                    <ul>
+                                      <li>
+                                        <form action="CRUD Usuario/registroUsuario.php" method="post">
+                                          <input type="text" name="correo" value="<?php echo $usuario['correo_electronico'] ?> " hidden></input>
+                                          <button class="btn btn-link" type="submit" name="accion" value="editar">Editar Informacion</button>
+                                        </form>
+                                      </li>
+                                      <li>
+                                        <form action="CRUD Usuario/registroUsuario.php" method="post">
+                                          <input type="text" name="correo" value="<?php echo $usuario['correo_electronico'] ?> " hidden></input>
+                                          <button class="btn btn-link" type="submit" name="accion" value="eliminar">Eliminar Perfil</button>
+                                        </form>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                <?php } ?>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>           
         </div>
-      </div>
-    </div>
   </body>
 </html>
