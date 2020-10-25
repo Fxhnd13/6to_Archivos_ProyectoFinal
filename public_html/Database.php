@@ -1,7 +1,7 @@
 <?php
   // hay dos clases mysql mysqli
   //$conexion = new mysqli("servidor","usuario","clave","bd")
-  $conexion = new mysqli("localhost","root","josecarlos","creatica");
+  $conexion; include_once('conexionSql.php');
   $sql = "SELECT nombre, apellido, correo_electronico, cui, id_persona FROM USER ";
   if(isset($_POST['buscar']))
     $sql.=" WHERE nombre LIKE '%".$_POST['buscar']."%' OR apellido LIKE '%".$_POST['buscar']."%' ";

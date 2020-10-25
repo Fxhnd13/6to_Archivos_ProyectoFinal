@@ -2,7 +2,7 @@
   
   if(isset($_POST['correo']))
   {
-    $conexion = new mysqli("localhost","root","josecarlos","labmia");
+    $conexion; include_once('conexionSql.php');
     $sql = "SELECT * FROM USER WHERE email = '".$_POST['correo']."' LIMIT 1";
     $resultado = $conexion->query($sql);
     foreach($resultado as $fila) $usuario=$fila;
