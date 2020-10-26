@@ -17,6 +17,13 @@
         <input type="hidden" name="id_curso" value="<?php echo $fila['id_curso']; ?>">
         <button class="btn btn-lg btn-block btn-danger" type="submit" name="button">Eliminar Curso</button>
       </form>
-    <?php }} ?> <!-- Aqui colocas si es maestro, el eliminar curso, si es alumno el poder inscribirse, y si ya esta inscrito el poder desincribirse -->
+      
+    <?php }else{ ?> <!-- Aqui colocas si es maestro, el eliminar curso, si es alumno el poder inscribirse, y si ya esta inscrito el poder desincribirse -->
+    <form action="perfil-curso.php" method="POST">
+                        <input type="hidden" name="id_curso" value="<?php echo $fila['id_curso'] ?>">
+                        <button class="btn btn-lg btn-block btn-danger" type="submit" name="button">Ver Curso</button>
+                        <!-- <input type="submit" value="  Ver " class="btn btn-sm btn-warning"> -->
+    </form>
+    <?php }} ?>
   </div>
 </div>

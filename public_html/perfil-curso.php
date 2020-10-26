@@ -5,10 +5,10 @@
         $sql1 = "SELECT curso.nombre nombre_curso , curso.fecha_creacion, curso.fecha_finalizacion, curso.costo_minimo, curso.id_curso, curso.id_area,
         COUNT(registro.id_curso) inscritos,persona.* FROM curso left join registro  ON (registro.id_curso=".
                 "".$_POST['id_curso']." ) join catedratico on catedratico.id_curso=curso.id_curso join persona on".
-                " (persona.id_persona=catedratico.id_persona) WHERE curso.id_curso= ".$_POST['id_curso'].";";
+                " (persona.id_persona=catedratico.id_persona) WHERE curso.id_curso= ".$_POST['id_curso']." and registro.finalizado=0;";
         $resultado = $conexion->query($sql1);
-        $nombre_persona = 2;
-        $resultado2;
+        $numero_persona = $_SESSION['id'];
+        $resultadoInscripocion;
         $rows;
         // $nombre_persona = $_SESSION['id'];
         //$cont = 0;
@@ -62,13 +62,13 @@
                         <!-- <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Follow </button> -->
                     </div>
                     <?php   
-                            $sql2 = "SELECT * FROM registro WHERE registro.id_curso= ".$fila['id_curso']." and registro.id_persona=".$nombre_persona.";";
-                            $resultado2 = $conexion->query($sql2);
-                            $rows = $resultado2-> num_rows;
+                            $sql2 = "SELECT * FROM registro WHERE registro.id_curso= ".$_POST['id_curso']." and registro.id_persona=".$numero_persona." AND registro.finalizado = 0;";
+                            $resultadoInscripocion = $conexion->query($sql2);
+                            $rows = $resultadoInscripocion-> num_rows;
                     ?>
                     <?php if ($rows > 0){ ?>
                         <div class="col-xs-12 col-sm-4 emphasis">
-                            <form action="cancelar-inscripcion.php" method="post">
+                            <form action="cancelar-inscripcion.php" method="POST">
                             </br>
                                 <span class="fa fa-user"></span>
                                 <input type="hidden" name="id_curso" value="<?php echo $fila['id_curso'] ?>">
