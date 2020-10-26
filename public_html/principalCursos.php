@@ -1,26 +1,32 @@
-<?php 
+<?php
 
-  session_start(); 
-  if(isset($_GET['consulta'])){//si hay una consulta miramos que tipo de consulta
-
-    if($_GET['consulta'] === "todosLosCursos"){//listamos todos
-
-    }else if($_GET['consulta'] === "cursosAsignados"){//listamos los cursos que la session activa tenga asignados
-
-    }else if($_GET['consulta'] === "cursosImpartidos"){//listamos los cursos que la session activa tenga para impartir
-
-    }else if($_GET['consulta'] === "cursoEspecifico"){//listamos los cursos con LIKE de la busqueda que haya realizado el usuario
-      //donde $_GET['nombreCurso'] tiene guardado el valor buscado por el usuario
+  session_start();
+  $resultado;
+  $conexion; include_once("conexionSql.php");
+    if(isset($_GET['consulta'])){//si hay una consulta miramos que tipo de consulta
+      if($_GET['consulta'] === "todosLosCursos"){//listamos todos
+        $sql = "SELECT * FROM Curso";
+        $resultado = $conexion->query($sql);
+      }else if($_GET['consulta'] === "cursosAsignados"){//listamos los cursos que la session activa tenga asignados !! agregar el resultado a la variable $resultado
+      }else if($_GET['consulta'] === "cursosImpartidos"){//listamos los cursos que la session activa tenga para impartir
+        $sql = "SELECT * FROM Curso
+        INNER JOIN Catedratico ON Curso.id_curso = Catedratico.id_curso
+        WHERE Catedratico.id_persona = " . $_SESSION['id'] . "";
+        $resultado = $conexion->query($sql);
+      }else if($_GET['consulta'] === "cursoEspecifico"){//listamos los cursos con LIKE de la busqueda que haya realizado el usuario
+        $sql = "SELECT * FROM Curso WHERE nombre LIKE '%" . $_GET['nombreCurso'] . "%'";
+        $resultado = $conexion->query($sql);
+        //donde $_GET['nombreCurso'] tiene guardado el valor buscado por el usuario
+      };
+    }else{//si no se hizo una consulta listamos todos los cursos
+      $sql = "SELECT * FROM Curso";
+      $resultado = $conexion->query($sql);
     }
-  }else{//si no se hizo una consulta listamos todos los cursos
-
-  }
-
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
     <title>Creatica</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,8 +37,35 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </head>
 </head>
-<body>
+<body class="bg-secondary">
     <?php include("navBar.php"); ?>
-    <h1>AQUÍ IRAN LOS CURSOOOOOS</h1>
+    <div class="d-flex bd-highlight">
+      <div class="p-2 w-75 bd-highlight">
+        <div class="container">
+          <?php /*echo $sql;*/ ?>
+          <div class="accordion" id="accordionExample">
+            <?php foreach ($resultado as $fila) { ?>
+              <div class="card">
+                <div class="card-header" id="heading<?php echo $fila['id_curso']; ?>">
+                  <h2 class="mb-0">
+                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse<?php echo $fila['id_curso']; ?>" aria-expanded="true" aria-controls="collapse<?php echo $fila['id_curso']; ?>">
+                      <h1><span class="badge badge-secondary"><?php echo $fila['nombre']; ?></span></h1>
+                    </button>
+                  </h2>
+                </div>
+                <div id="collapse<?php echo $fila['id_curso']; ?>" class="collapse show" aria-labelledby="heading<?php echo $fila['id_curso']; ?>" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <?php include("tarjeta_curso.php"); ?>
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+          </div>
+        </div>
+      </div>
+      <div class="p-2 w-25 bd-highlight">
+        <?php include("area.php"); ?>
+      </div>
+    </div>
 </body>
 </html>

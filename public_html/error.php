@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 session_start();
 $mensaje = $_SESSION['mensajeError'];
@@ -42,7 +42,7 @@ $mensaje = $_SESSION['mensajeError'];
               </div>
               <h4>¡Oops!</h4>
               <p>Causa: <?php echo $mensaje ?></p>
-              <a href="<?=base_url()?>" class="btn btn-primary btn-round">Ir a la pagina</a>
+              <a href="<?=base_url();?>" class="btn btn-primary btn-round">Ir a la pagina</a>
             </div>
           </div>
         </div>

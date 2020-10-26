@@ -1,4 +1,4 @@
-<?php 
+<?php
    if(isset($_GET['accion'])){
       session_abort();
    }
@@ -14,7 +14,6 @@
     <link rel=StyleSheet HREF="Css/login.css" TYPE="text/css" MEDIA=screen>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
 
     <title>Iniciar Sesion</title>
 </head>
