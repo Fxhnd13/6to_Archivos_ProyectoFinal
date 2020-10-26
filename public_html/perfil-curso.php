@@ -68,7 +68,7 @@
                     ?>
                     <?php if ($rows > 0){ ?>
                         <div class="col-xs-12 col-sm-4 emphasis">
-                            <form action="lista-cursos.php" method="post">
+                            <form action="cancelar-inscripcion.php" method="post">
                             </br>
                                 <span class="fa fa-user"></span>
                                 <input type="hidden" name="id_curso" value="<?php echo $fila['id_curso'] ?>">
