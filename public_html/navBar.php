@@ -43,10 +43,17 @@
         </li>
 
         </ul>
+<<<<<<< HEAD
         <form class="form-inline my-2 my-lg-0" action="principalCursos.php" method="GET"> <!-- igual que las consultas anteriores, con la diferencia que se busca por nombre-->
           <input type="hidden" name="consulta" value="cursoEspecifico">
           <input name="nombreCurso" class="form-control mr-sm-2" type="search" placeholder="Nombre de curso" aria-label="Search" >
           <button name="consulta" value="cursoEspecifico" class="btn btn-outline-success my-2 my-sm-0" type="submit" >Buscar</button>
+=======
+        <form class="form-inline my-2 my-lg-0" action="principalCursos.php" method="get"> <!-- igual que las consultas anteriores, con la diferencia que se busca por nombre-->
+            <input name="nombreCurso" class="form-control mr-sm-2" type="search" placeholder="Nombre de curso" aria-label="Search" >
+            <input type="hidden" name="busqueda" value="1">
+            <button name="consulta" value="cursoEspecifico" class="btn btn-outline-success my-2 my-sm-0" type="submit" >Buscar</button>
+>>>>>>> 6a232752430891316378854768e5ff80aef3ce2f
         </form>
     </div>
 </nav>

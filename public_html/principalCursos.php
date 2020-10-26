@@ -39,33 +39,8 @@
 </head>
 <body class="bg-secondary">
     <?php include("navBar.php"); ?>
-    <div class="d-flex bd-highlight">
-      <div class="p-2 w-75 bd-highlight">
-        <div class="container">
-          <?php /*echo $sql;*/ ?>
-          <div class="accordion" id="accordionExample">
-            <?php foreach ($resultado as $fila) { ?>
-              <div class="card">
-                <div class="card-header" id="heading<?php echo $fila['id_curso']; ?>">
-                  <h2 class="mb-0">
-                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse<?php echo $fila['id_curso']; ?>" aria-expanded="true" aria-controls="collapse<?php echo $fila['id_curso']; ?>">
-                      <h1><span class="badge badge-secondary"><?php echo $fila['nombre']; ?></span></h1>
-                    </button>
-                  </h2>
-                </div>
-                <div id="collapse<?php echo $fila['id_curso']; ?>" class="collapse show" aria-labelledby="heading<?php echo $fila['id_curso']; ?>" data-parent="#accordionExample">
-                  <div class="card-body">
-                    <?php include("tarjeta_curso.php"); ?>
-                  </div>
-                </div>
-              </div>
-            <?php } ?>
-          </div>
-        </div>
-      </div>
-      <div class="p-2 w-25 bd-highlight">
-        <?php include("area.php"); ?>
-      </div>
-    </div>
+    <h1 class="container h-100">Lista de Cursos</h1>
+    <?php include("lista-cursos.php"); ?>
+
 </body>
 </html>
