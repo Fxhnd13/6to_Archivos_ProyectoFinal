@@ -1,27 +1,33 @@
-<?php 
 
-  session_start(); 
-  //$conexion; include_once('conexionSql.php');
-  if(isset($_GET['consulta'])){//si hay una consulta miramos que tipo de consulta
+<?php
 
-    if($_GET['consulta'] === "todosLosCursos"){//listamos todos
-
-    }else if($_GET['consulta'] === "cursosAsignados"){//listamos los cursos que la session activa tenga asignados
-
-    }else if($_GET['consulta'] === "cursosImpartidos"){//listamos los cursos que la session activa tenga para impartir
-
-    }else if($_GET['consulta'] === "cursoEspecifico"){//listamos los cursos con LIKE de la busqueda que haya realizado el usuario
-      //donde $_GET['nombreCurso'] tiene guardado el valor buscado por el usuario
+  session_start();
+  $resultado;
+  $conexion; include_once("conexionSql.php");
+    if(isset($_GET['consulta'])){//si hay una consulta miramos que tipo de consulta
+      if($_GET['consulta'] === "todosLosCursos"){//listamos todos
+        $sql = "SELECT * FROM Curso";
+        $resultado = $conexion->query($sql);
+      }else if($_GET['consulta'] === "cursosAsignados"){//listamos los cursos que la session activa tenga asignados !! agregar el resultado a la variable $resultado
+      }else if($_GET['consulta'] === "cursosImpartidos"){//listamos los cursos que la session activa tenga para impartir
+        $sql = "SELECT * FROM Curso
+        INNER JOIN Catedratico ON Curso.id_curso = Catedratico.id_curso
+        WHERE Catedratico.id_persona = " . $_SESSION['id'] . "";
+        $resultado = $conexion->query($sql);
+      }else if($_GET['consulta'] === "cursoEspecifico"){//listamos los cursos con LIKE de la busqueda que haya realizado el usuario
+        $sql = "SELECT * FROM Curso WHERE nombre LIKE '%" . $_GET['nombreCurso'] . "%'";
+        $resultado = $conexion->query($sql);
+        //donde $_GET['nombreCurso'] tiene guardado el valor buscado por el usuario
+      };
+    }else{//si no se hizo una consulta listamos todos los cursos
+      $sql = "SELECT * FROM Curso";
+      $resultado = $conexion->query($sql);
     }
-  }else{//si no se hizo una consulta listamos todos los cursos
-
-  }
-
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
     <title>Creatica</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,14 +45,9 @@
 
   </head>
 </head>
-<body>
+<body class="bg-secondary">
     <?php include("navBar.php"); ?>
     <h1 class="container h-100">Lista de Cursos</h1>
     <?php include("lista-cursos.php"); ?>
-
-    <?php include("modal-inscrito.php"); ?>
-
-    
-    
 </body>
 </html>

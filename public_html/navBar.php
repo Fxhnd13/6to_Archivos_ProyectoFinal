@@ -1,4 +1,4 @@
-<?php 
+<?php
 
     $conexion; include_once("conexionSql.php");
     $consultaTipo = $conexion->query("SELECT * FROM catedratico WHERE id_persona=".$_SESSION['id'].";");
@@ -15,10 +15,11 @@
             Cursos
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <!-- tecnicamente estos tres enlaces dirigen a la misma página pero hay que hacer 
+            <!-- tecnicamente estos tres enlaces dirigen a la misma página pero hay que hacer
             que reciban un parametro get, tal que podamos determinar que consulta realizar -->
             <a class="dropdown-item" href="principalCursos.php?consulta=todosLosCursos">Cursos Disponibles</a> <!-- aqui enlace a la pagina principal-->
             <a class="dropdown-item" href="principalCursos.php?consulta=cursosAsignados">Cursos Asignados</a> <!-- aquí enlace a la pagina de cursos que el usuario tiene asignados-->
+            <a class="dropdown-item" href="crear_curso.php">Crear Curso</a> <!-- aquí enlace a la pagina de cursos que el usuario tiene asignados-->
             <?php if($tipos > 0 ){ ?>
                 <a class="dropdown-item" href="principalCursos.php?consulta=cursosImpartidos">Cursos Impartidos</a> <!-- aquí enlace a la pagina de cursos que el usuario imparte -->
             <?php } ?>
@@ -42,10 +43,17 @@
         </li>
 
         </ul>
+<<<<<<< HEAD
+        <form class="form-inline my-2 my-lg-0" action="principalCursos.php" method="GET"> <!-- igual que las consultas anteriores, con la diferencia que se busca por nombre-->
+          <input type="hidden" name="consulta" value="cursoEspecifico">
+          <input name="nombreCurso" class="form-control mr-sm-2" type="search" placeholder="Nombre de curso" aria-label="Search" >
+          <button name="consulta" value="cursoEspecifico" class="btn btn-outline-success my-2 my-sm-0" type="submit" >Buscar</button>
+=======
         <form class="form-inline my-2 my-lg-0" action="principalCursos.php" method="get"> <!-- igual que las consultas anteriores, con la diferencia que se busca por nombre-->
             <input name="nombreCurso" class="form-control mr-sm-2" type="search" placeholder="Nombre de curso" aria-label="Search" >
             <input type="hidden" name="busqueda" value="1">
             <button name="consulta" value="cursoEspecifico" class="btn btn-outline-success my-2 my-sm-0" type="submit" >Buscar</button>
+>>>>>>> 6a232752430891316378854768e5ff80aef3ce2f
         </form>
     </div>
 </nav>
@@ -60,7 +68,7 @@
         </button>
         </div>
         <div class="modal-body">
-            Desarrollado Por: 
+            Desarrollado Por:
             <ul>
             <li>José Carlos Soberanis Ramirez</li>
             <li>Mario Moisés Ramírez Tobar</li>

@@ -1,12 +1,12 @@
-<?php 
+<?php
     session_start();
     $conexion; include_once('conexionSql.php');
     $sql = "SELECT * FROM persona WHERE correo_electronico='".$_GET['correo']."' LIMIT 1;";
-  
+
     $resultado = $conexion->query($sql);
     $usuario;
     foreach($resultado as $fila) $usuario=$fila;
-    $consultaTipo = $conexion->query("SELECT * FROM catedratico WHERE idPersona=".$usuario['id_persona'].";");
+    $consultaTipo = $conexion->query("SELECT * FROM catedratico WHERE id_persona=".$usuario['id_persona'].";");
     $tipo;
     if(($consultaTipo->num_rows) > 0){
       $tipo = "Catedratico";
@@ -28,7 +28,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </head>
   <body>
-                      
+
         <br><br>
         <div class="container card">
                 <div class="row">
@@ -121,7 +121,7 @@
                             </div>
                         </div>
                     </div>
-                </div>      
+                </div>
         </div>
 
         <!--MODAL PARA ELIMINAR CUENTA, PERO NO SE SI ES VIABLE, DEMASIADOS REGISTROS QUE ELIMINAR, NO FUNCIONAL-->
@@ -138,11 +138,11 @@
                   ¿Esta seguro que desea eliminar su cuenta?
               </div>
               <div class="modal-footer">
-                  <form action="accionUsuario.php" method="post">  
+                  <form action="accionUsuario.php" method="post">
                     <div class="row justify-content-center">
                       <button name="accion" value="eliminar" class="btn btn-danger " type="submit">Eliminar</button>
                       <div class="col-sm-1"></div>
-                      <button type="button" class=" btn btn-secondary" data-dismiss="modal">Cerrar</button>     
+                      <button type="button" class=" btn btn-secondary" data-dismiss="modal">Cerrar</button>
                       <div class="col-sm-1"></div>
                   </div>
                   </form>
@@ -161,11 +161,11 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <form action="accionUsuario.php" method="post">  
+              <form action="accionUsuario.php" method="post">
                 <div class="modal-body">
                 <select name="idCurso" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                   <option selected value="-1">Elegir curso...</option>
-                  <?php 
+                  <?php
                     $resultado = $conexion->query("SELECT * FROM curso;");
                     foreach($resultado as $curso){
                   ?>
@@ -177,7 +177,7 @@
                   <div class="row justify-content-center">
                       <button name="accion" value="docente" class="btn btn-dark " type="submit">Dar curso</button>
                       <div class="col-sm-1"></div>
-                      <button type="button" class=" btn btn-secondary" data-dismiss="modal">Cerrar</button>     
+                      <button type="button" class=" btn btn-secondary" data-dismiss="modal">Cerrar</button>
                       <div class="col-sm-1"></div>
                   </div>
                 </div>
@@ -185,7 +185,7 @@
             </div>
           </div>
         </div>
-        
+
 
   </body>
 </html>
