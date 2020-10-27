@@ -1,6 +1,6 @@
 <?php
   $conexion; include_once("conexionSql.php");
-  $sql = "SELECT nombre FROM Area";
+  $sql = "SELECT nombre FROM area";
   $resultado = $conexion->query($sql);
  ?>
 <!DOCTYPE html>
