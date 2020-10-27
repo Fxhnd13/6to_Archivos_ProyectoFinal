@@ -9,7 +9,7 @@
   </div>
   <div class="w-25 bd-highlight">
     <?php
-      $sql2 = "SELECT * FROM Catedratico WHERE id_curso = '".$fila['id_curso']."'";
+      $sql2 = "SELECT * FROM catedratico WHERE id_curso = '".$fila['id_curso']."'";
       $result = $conexion->query($sql2);
       foreach ($result as $catedratico) {
       if ($catedratico['id_persona'] == $_SESSION['id']) { ?>
@@ -17,7 +17,7 @@
         <input type="hidden" name="id_curso" value="<?php echo $fila['id_curso']; ?>">
         <button class="btn btn-lg btn-block btn-danger" type="submit" name="button">Eliminar Curso</button>
       </form>
-      
+
     <?php }else{ ?> <!-- Aqui colocas si es maestro, el eliminar curso, si es alumno el poder inscribirse, y si ya esta inscrito el poder desincribirse -->
     <form action="perfil-curso.php" method="POST">
                         <input type="hidden" name="id_curso" value="<?php echo $fila['id_curso'] ?>">

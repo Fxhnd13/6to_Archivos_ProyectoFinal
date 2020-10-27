@@ -6,21 +6,21 @@
   $conexion; include_once("conexionSql.php");
     if(isset($_GET['consulta'])){//si hay una consulta miramos que tipo de consulta
       if($_GET['consulta'] === "todosLosCursos"){//listamos todos
-        $sql = "SELECT * FROM Curso";
+        $sql = "SELECT * FROM curso";
         $resultado = $conexion->query($sql);
       }else if($_GET['consulta'] === "cursosAsignados"){//listamos los cursos que la session activa tenga asignados !! agregar el resultado a la variable $resultado
       }else if($_GET['consulta'] === "cursosImpartidos"){//listamos los cursos que la session activa tenga para impartir
-        $sql = "SELECT * FROM Curso
-        INNER JOIN Catedratico ON Curso.id_curso = Catedratico.id_curso
-        WHERE Catedratico.id_persona = " . $_SESSION['id'] . "";
+        $sql = "SELECT * FROM curso
+        INNER JOIN catedratico ON curso.id_curso = catedratico.id_curso
+        WHERE catedratico.id_persona = " . $_SESSION['id'] . "";
         $resultado = $conexion->query($sql);
       }else if($_GET['consulta'] === "cursoEspecifico"){//listamos los cursos con LIKE de la busqueda que haya realizado el usuario
-        $sql = "SELECT * FROM Curso WHERE nombre LIKE '%" . $_GET['nombreCurso'] . "%'";
+        $sql = "SELECT * FROM curso WHERE nombre LIKE '%" . $_GET['nombreCurso'] . "%'";
         $resultado = $conexion->query($sql);
         //donde $_GET['nombreCurso'] tiene guardado el valor buscado por el usuario
       };
     }else{//si no se hizo una consulta listamos todos los cursos
-      $sql = "SELECT * FROM Curso";
+      $sql = "SELECT * FROM curso";
       $resultado = $conexion->query($sql);
     }
 ?>
@@ -76,7 +76,7 @@
       </div>
     </div>
     <?php include("modal-inscrito.php"); ?>
-              
+
 
 
 </body>
