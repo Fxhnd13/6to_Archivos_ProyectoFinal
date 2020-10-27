@@ -7,6 +7,7 @@
                 "".$_POST['id_curso']." ) join catedratico on catedratico.id_curso=curso.id_curso join persona on".
                 " (persona.id_persona=catedratico.id_persona) WHERE curso.id_curso= ".$_POST['id_curso']." and registro.finalizado=0;";
         $resultado = $conexion->query($sql1);
+        echo $sql1;
         $numero_persona = $_SESSION['id'];
         $resultadoInscripocion;
         $rows;
@@ -56,8 +57,13 @@
                     </div>
                 </div>            
                 <div class="col-xs-12 divider text-center">
+                    <?php   
+                            $sql3 = "SELECT * FROM registro WHERE registro.id_curso= ".$_POST['id_curso']." AND registro.finalizado = 0;";
+                            $resultadoInscripocion1 = $conexion->query($sql3);
+                            $rows2 = $resultadoInscripocion1-> num_rows;
+                    ?>
                     <div class="col-xs-12 col-sm-4 emphasis">
-                        <h2><strong> <?php echo $fila['inscritos'] ?> </strong></h2>                    
+                        <h2><strong> <?php echo $rows2 ?> </strong></h2>                    
                         <p><small>Inscritos</small></p>
                         <!-- <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Follow </button> -->
                     </div>

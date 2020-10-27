@@ -9,7 +9,7 @@
   </div>
   <div class="w-25 bd-highlight">
     <?php
-      $sql2 = "SELECT * FROM catedratico WHERE id_curso = '".$fila['id_curso']."'";
+      $sql2 = "SELECT * FROM catedratico WHERE id_curso = '".$fila['id_curso']."' LIMIT 1;";
       $result = $conexion->query($sql2);
       foreach ($result as $catedratico) {
       if ($catedratico['id_persona'] == $_SESSION['id']) { ?>
