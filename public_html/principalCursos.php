@@ -1,7 +1,9 @@
-
 <?php
-
   session_start();
+  if(!isset($_SESSION['correo'])){
+    $_SESSION['mensajeError'] = "Inicie sesión para poder acceder a la pagina web";
+    header("location: error.php");
+  }
   $resultado;
   $conexion; include_once("conexionSql.php");
     if(isset($_GET['consulta'])){//si hay una consulta miramos que tipo de consulta
@@ -46,7 +48,7 @@
   </head>
 </head>
 <body class="bg-secondary">
-    <?php include("navBar.php"); ?>
+    <?php include_once("navBar.php"); ?>
     <div class="d-flex bd-highlight">
       <div class="p-2 w-75 bd-highlight">
         <div class="container">

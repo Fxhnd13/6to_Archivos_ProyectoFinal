@@ -28,8 +28,8 @@
         <div class="col-md-4">
         <h1 class="text-center"><?php echo ((isset($usuario))? "Editar Usuario" : "Crear Usuario") ?></h1>
         <form action="accionUsuario.php" method="post">
-            <input type="email" name="correoViejo" value="<?php echo ((isset($usuario))? $usuario['correo_electronico'] : "") ?>">
-            <input type="text" name="accion" value="<?php echo ((isset($usuario))? "editar" : "crear") ?>">
+            <input hidden type="email" name="correoViejo" value="<?php echo ((isset($usuario))? $usuario['correo_electronico'] : "") ?>">
+            <input hidden type="text" name="accion" value="<?php echo ((isset($usuario))? "editar" : "crear") ?>">
             <?php if(!isset($usuario)){ ?>
                 <label for="cui">Cui: </label>
                 <input class="form-control" type="text" name="cui" value="" required>

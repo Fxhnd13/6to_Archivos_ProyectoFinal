@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if(!isset($_SESSION['correo'])){
+      $_SESSION['mensajeError'] = "Inicie sesión para poder acceder a la pagina web";
+      header("location: error.php");
+    }
     $conexion; include_once('conexionSql.php');
     $sql = "SELECT * FROM persona WHERE correo_electronico='".$_GET['correo']."' LIMIT 1;";
 
@@ -28,7 +32,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </head>
   <body>
-
+        <?php include_once("navBar.php"); ?>
         <br><br>
         <div class="container card">
                 <div class="row">

@@ -2,6 +2,7 @@
 
     $conexion; include_once("conexionSql.php");
     $consultaTipo = $conexion->query("SELECT * FROM catedratico WHERE id_persona=".$_SESSION['id'].";");
+    echo "SELECT * FROM catedratico WHERE id_persona=".$_SESSION['id'].";";
     $tipos = $consultaTipo->num_rows;
 
 ?>
