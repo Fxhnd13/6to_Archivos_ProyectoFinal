@@ -11,6 +11,10 @@
         $sql = "SELECT * FROM curso";
         $resultado = $conexion->query($sql);
       }else if($_GET['consulta'] === "cursosAsignados"){//listamos los cursos que la session activa tenga asignados !! agregar el resultado a la variable $resultado
+        $sql = "SELECT * FROM curso
+        INNER JOIN registro ON curso.id_curso = registro.id_curso
+        WHERE registro.id_persona = " . $_SESSION['id'] . "";
+        $resultado = $conexion->query($sql);
       }else if($_GET['consulta'] === "cursosImpartidos"){//listamos los cursos que la session activa tenga para impartir
         $sql = "SELECT * FROM curso
         INNER JOIN catedratico ON curso.id_curso = catedratico.id_curso
