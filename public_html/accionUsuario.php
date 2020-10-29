@@ -13,11 +13,7 @@ if($_POST['accion'] === "docente"){
         $_SESSION['mensajeError'] = "No seleccionó un curso para poder dar.";
         header("location: error.php");
     }else{
-        $consultaIdNuevo = "SELECT (MAX(id_persona)+1) as id_persona FROM persona";
-        $resultado = $conexion->query($consultaIdNuevo);
-        foreach($resultado as $fila) $idCatedratico=$fila['id_persona']; //obtenemos el id del catedratico a agregar
-        if(!isset($idCatedratico)) $idCatedratico=1;
-        $sql = "INSERT INTO catedratico (id_persona,id_curso,id_catedratico) VALUES (".$idPersona.",".$idCurso.",".$idCatedratico.")";
+        $sql = "INSERT INTO catedratico (id_persona,id_curso) VALUES (".$idPersona.",".$idCurso.")";
         if(!$conexion->query($sql)){
             $_SESSION['mensajeError'] = "No se pudo asignar el curso error en la base de datos (accionUsuario)";
             header("location: error.php");

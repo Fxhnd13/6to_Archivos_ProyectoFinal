@@ -5,9 +5,8 @@
         $sql1 = "SELECT curso.nombre nombre_curso , curso.fecha_creacion, curso.fecha_finalizacion, curso.costo_minimo, curso.id_curso, curso.id_area,
         COUNT(registro.id_curso) inscritos,persona.* FROM curso left join registro  ON (registro.id_curso=".
                 "".$_POST['id_curso']." ) join catedratico on catedratico.id_curso=curso.id_curso join persona on".
-                " (persona.id_persona=catedratico.id_persona) WHERE curso.id_curso= ".$_POST['id_curso']." and registro.finalizado=0;";
+                " (persona.id_persona=catedratico.id_persona) WHERE curso.id_curso= ".$_POST['id_curso'].";";
         $resultado = $conexion->query($sql1);
-        echo $sql1;
         $numero_persona = $_SESSION['id'];
         $resultadoInscripocion;
         $rows;
@@ -33,7 +32,7 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
     <title>Curso</title>
 </head>
-<body>
+<body>    
     </br></br></br></br></br></br>
     <?php foreach ($resultado as $fila): ?>
     <div class="container">
@@ -58,16 +57,20 @@
                 </div>            
                 <div class="col-xs-12 divider text-center">
                     <?php   
-                            $sql3 = "SELECT * FROM registro WHERE registro.id_curso= ".$_POST['id_curso']." AND registro.finalizado = 0;";
-                            $resultadoInscripocion1 = $conexion->query($sql3);
-                            $rows2 = $resultadoInscripocion1-> num_rows;
+                            // $sql3 = "SELECT * FROM registro WHERE registro.id_curso= ".$_POST['id_curso']." AND registro.finalizado = 0;";
+                            // $resultadoInscripocion1 = $conexion->query($sql3);
+                            // $rows2 = $resultadoInscripocion1-> num_rows;
+                            $sqlFuncionFilas = "SELECT calcularInscritos(".$_POST['id_curso'].");";
+                            $rows2 = $conexion->query($sqlFuncionFilas);
+                            foreach ($rows2 as $fila2):
                     ?>
                     <div class="col-xs-12 col-sm-4 emphasis">
-                        <h2><strong> <?php echo $rows2 ?> </strong></h2>                    
+                        <h2><strong> <?php echo $fila2['calcularInscritos(1)'] ?> </strong></h2>                    
                         <p><small>Inscritos</small></p>
                         <!-- <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Follow </button> -->
                     </div>
                     <?php   
+                            endforeach;
                             $sql2 = "SELECT * FROM registro WHERE registro.id_curso= ".$_POST['id_curso']." and registro.id_persona=".$numero_persona." AND registro.finalizado = 0;";
                             $resultadoInscripocion = $conexion->query($sql2);
                             $rows = $resultadoInscripocion-> num_rows;
@@ -97,6 +100,6 @@
             </div>
         </div>
     </div>
-    <?php endforeach; ?>    
+    <?php endforeach; ?>  
 </body>
 </html>
