@@ -58,7 +58,9 @@
         <div class="container">
           <?php /*echo $sql;*/ ?>
           <div class="accordion" id="accordionExample">
-            <?php foreach ($resultado as $fila) { ?>
+            <?php 
+            if(($resultado->num_rows)>0){
+              foreach ($resultado as $fila) { ?>
               <div class="card">
                 <div class="card-header" id="heading<?php echo $fila['id_curso']; ?>">
                   <h2 class="mb-0">
@@ -73,7 +75,23 @@
                   </div>
                 </div>
               </div>
-            <?php } ?>
+            <?php }
+            }else{
+                if(isset($_GET['consulta'])){
+                  if($_GET['consulta'] === "todosLosCursos"){//listamos todos ?>
+                    <h2 class="text-white">No hay cursos registrados en el sistema </h2>
+                  <?php }else if($_GET['consulta'] === "cursosAsignados"){//listamos los cursos que la session activa ?>
+                    <h2 class="text-white">No tiene cursos asignados</h2>
+                  <?php }else if($_GET['consulta'] === "cursosImpartidos"){//listamos los cursos que la session activa tenga ?>
+                    <h2 class="text-white">No hay cursos a impartir</h2>
+                  <?php }else if($_GET['consulta'] === "cursoEspecifico"){//listamos los cursos con LIKE de la busqueda que haya ?>
+                    <h2 class="text-white">No se encontraron resultados para la busqueda realizada</h2>
+                  <?php }
+                }else{ ?>
+                    <h2 class="text-white">No hay cursos registrados en el sistema </h2>
+                <?php }
+            }
+            ?>
           </div>
         </div>
       </div>

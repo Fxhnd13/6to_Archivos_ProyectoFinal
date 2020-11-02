@@ -18,7 +18,7 @@ if($_POST['accion'] === "docente"){
             $_SESSION['mensajeError'] = "No se pudo asignar el curso error en la base de datos (accionUsuario)";
             header("location: error.php");
         }else{
-            header("location: perfil.php?correo=".$_SESSION);
+            header("location: perfil.php?correo=".$_SESSION['correo']);
         }
     }
 

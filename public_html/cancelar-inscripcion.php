@@ -6,12 +6,12 @@
         $idpersona = $_SESSION['id'];
         $sql1 = "UPDATE registro SET finalizado=1 WHERE id_persona =".$idpersona." and id_curso = ".$_POST['id_curso'].";";
         $rows;
-        echo $sql1;
-       if($conexion->query($sql1) === TRUE){
+       if($conexion->query($sql1)){
             $_SESSION['activ_modal_cancelar'] = "inscrito";
             header("location: principalCursos.php");
         }else{
-            //header("location: index.php");
+            $_SESSION['mensajeError'] = "No se pudo cancelar la inscripcion.";
+            header("location: error.php");
         }
         //$cont = 0;
     /*}else{

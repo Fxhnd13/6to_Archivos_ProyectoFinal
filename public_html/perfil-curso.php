@@ -43,7 +43,7 @@
                     <div class="col-xs-12 col-sm-8">
                     
                         <h2><?php echo $fila['nombre_curso'] ?></h2>
-                        <p><strong>Catedratico: </strong> <?php echo $fila['nombre'] ?> <?php echo $fila['apellido'] ?> </p>
+                        <p><strong>Catedratico: </strong> <a href="perfil.php?correo=<?php echo $fila['correo_electronico'] ?> "><?php echo $fila['nombre'] ?> <?php echo $fila['apellido'] ?> </a></p>
                         <p><strong>Correo: </strong> <?php echo $fila['correo_electronico'] ?></p>
                         <p><strong>Telefono: </strong> <?php echo $fila['telefono'] ?></p>
                         </br></br>
@@ -60,12 +60,12 @@
                             // $sql3 = "SELECT * FROM registro WHERE registro.id_curso= ".$_POST['id_curso']." AND registro.finalizado = 0;";
                             // $resultadoInscripocion1 = $conexion->query($sql3);
                             // $rows2 = $resultadoInscripocion1-> num_rows;
-                            $sqlFuncionFilas = "SELECT calcularInscritos(".$_POST['id_curso'].");";
+                            $sqlFuncionFilas = "SELECT calcularInscritos(".$_POST['id_curso'].") AS inscritos";
                             $rows2 = $conexion->query($sqlFuncionFilas);
                             foreach ($rows2 as $fila2):
                     ?>
                     <div class="col-xs-12 col-sm-4 emphasis">
-                        <h2><strong> <?php echo $fila2['calcularInscritos(1)'] ?> </strong></h2>                    
+                        <h2><strong> <?php echo $fila2['inscritos'] ?> </strong></h2>                    
                         <p><small>Inscritos</small></p>
                         <!-- <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Follow </button> -->
                     </div>
