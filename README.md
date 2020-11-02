@@ -67,3 +67,9 @@ CREATE TRIGGER `catedratico_binsert` BEFORE INSERT ON `catedratico` FOR EACH ROW
 	END
 $$
 DELIMITER ;
+
+# Desarrolladores
+
+* Yefer Rodrigo Alvarado Tzul - 201731163
+* Mario Moisés Ramírez Tobar - 201830007
+* José Carlos Soberanis Ramírez - 201730246
